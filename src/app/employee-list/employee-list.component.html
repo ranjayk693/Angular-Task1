@@ -1,0 +1,43 @@
+<section class="">
+  <button class="add-btn" (click)="onAddEmployee()">Add Employee</button>
+</section>
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Gender</th>
+        <th>Skills</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(item of userData; track item.id) {
+      <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.contact }}</td>
+        <td>{{ item.gender }}</td>
+        <td>
+          <ol>
+            @for(list of item.skills; track $index){
+            <li>{{ list.skill }} (Exp.{{ list.experience }} years)</li>
+            }
+          </ol>
+        </td>
+        <td>
+          <button [routerLink]="['/EditEmployeeDetails', item.id]">Edit</button>
+          <button (click)="OnDeleteItem(item.id)">Delete</button>
+        </td>
+      </tr>
+
+      }
+    </tbody>
+  </table>
+</section>
+
+<!-- <router-outlet></router-outlet> -->
