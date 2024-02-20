@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UsersDataService } from '../services/employee.service';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Employee } from '../models/employee';
 
 @Component({
   selector: 'app-employee-list',
@@ -10,14 +11,22 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './employee-list.component.scss',
 })
 export class EmployeeListComponent {
-  userData: any;
-  employeeId: any;
-  constructor(private DataItem: UsersDataService, private router: Router) {
-    this.userData = DataItem.getData();
+  userData: Employee[] = [];
+  constructor(
+    private router: Router,
+    private employeeService: UsersDataService
+  ) {}
+
+  ngOnInit(): void {
+    this.employeeService
+      .getEmployee()
+      .subscribe((employees) => (this.userData = employees));
   }
 
-  OnDeleteItem(id: number) {
-    this.userData = this.DataItem.DeleteItem(id);
+  OnDeleteItem(id: number): void {
+    this.employeeService.deleteEmployee(id).subscribe(() => {
+      this.userData = this.userData.filter((emp) => emp.id !== id);
+    });
   }
 
   onAddEmployee() {

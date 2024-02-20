@@ -55,20 +55,12 @@ export class UsersDataService {
     },
   ];
 
-  // getData() {
-  //   return this.UserData;
-  // }
-  // DeleteItem(id: number) {
-  //   this.UserData = this.UserData.filter((data: any) => data.id != id);
-  //   return this.UserData;
-  // }
-
   getEmployee(): Observable<Employee[]> {
     return of(this.UserData);
   }
 
   getEmployeeById(id: number): Observable<Employee> {
-    const employee:any = this.UserData.find((emp) => emp.id === id);
+    const employee: any = this.UserData.find((emp) => emp.id === id);
     return of(employee);
   }
 
