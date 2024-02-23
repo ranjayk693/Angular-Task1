@@ -20,7 +20,7 @@ import { JsonPipe } from '@angular/common';
 export class EmployeeManagementComponent {
   @Input() id: string = '';
   @Input() compunent: string = '';
-  IsRead: boolean = true;
+
   ButtonText = '';
   EmployeeForm: FormGroup;
   constructor(
@@ -98,13 +98,12 @@ export class EmployeeManagementComponent {
   ngOnInit() {
     this.ButtonText = this.compunent === 'employee-edit' ? 'Update' : 'Submit';
     if (this.id) {
-      this.IsRead = true;
       const UserData = this.employeeService.UserData.filter((element) => {
         return element.id.toString() == this.id;
       });
 
       this.EmployeeForm = this.fb.group({
-        id: [UserData[0].id, Validators.required],
+        id: [{value:UserData[0].id,disabled:true}, Validators.required],
         name: [UserData[0].name, Validators.required],
         email: [UserData[0].email, Validators.required],
         contact: [UserData[0].contact, Validators.required],

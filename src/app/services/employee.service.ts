@@ -65,8 +65,13 @@ export class UsersDataService {
   }
 
   addEmployee(employee: Employee): Observable<Employee> {
-    employee.id = this.UserData.length + 1;
-    this.UserData.push(employee);
+    const existingEmployee = this.UserData.find(emp => emp.id === employee.id);
+    if(existingEmployee){
+      alert("Duplicate ID are not allowed")
+    }
+    else{
+      this.UserData.push(employee);
+    }
     return of(employee);
   }
 
