@@ -47,9 +47,9 @@
     <section class="row3 row">
       <section class="employee-details skill-container">
         <label>Skills</label>
-        <button (click)="onAddSkillButton()">Add Skill</button>
+        <button class="skill-add-btn" (click)="onAddSkillButton()">Add skill +</button>
       </section>
-      <section class="employee-details">
+      <section class="employee-details gender-section">
         <label> Gender:</label>
         <section>
           <input
@@ -58,6 +58,7 @@
             value="male"
             id="male"
             formControlName="gender"
+            [checked]="EmployeeForm.get('gender')?.value == 'male'"
           />
           <label for="male">Male</label>
 
@@ -67,6 +68,7 @@
             value="female"
             id="female"
             formControlName="gender"
+            [checked]="EmployeeForm.get('gender')?.value == 'female'"
           />
           <label for="female">Female</label>
         </section>
@@ -76,13 +78,13 @@
     <section formArrayName="skills">
       @for(item of skills!.controls ;track item ;let i=$index){
 
-      <section [formGroupName]="i">
+      <section [formGroupName]="i" class="dynamic-skills-container">
         <textarea
           name=""
           id=""
           cols="20"
           rows="1"
-          placeholder="Enter Skill Name"
+          placeholder="Enter skill name"
           formControlName="skill"
         ></textarea>
         <select formControlName="experience">
@@ -91,34 +93,112 @@
           <option value="Intermediate">Medium Experince</option>
           <option value="Experinced">High Experince</option>
         </select>
-        <button (click)="onDeleteButton(i)">Delete</button>
+        <button class="skills-delete-btn" (click)="onDeleteButton(i)"><img src="assets/icons/delete.png" alt="delete-logo"></button>
       </section>
       }
     </section>
-    <button type="submit">{{ ButtonText }}</button>
+    <button type="submit" class="submit-update-btn">{{ ButtonText }}</button>
   </form>
 
   <pre
     >{{ EmployeeForm.value | json }}
   </pre>
+
   <style>
+    .form-container{
+      border: 1px solid red;
+      display: flex;
+      flex-direction: column;
+    }
     .employee-details {
       display: flex;
       flex-direction: column;
     }
 
+    input{
+      font-size: 15px;
+      width: 25rem;
+      padding: .3rem;
+    }
+
     .row {
       display: flex;
+      align-items: center;
       gap: 20px;
+      border: 1px solid green;
     }
 
     textarea {
       resize: none;
+      padding: .5rem;
+    }
+
+    select{
+      padding: .5rem;
     }
 
     .skill-container {
-      display: inline;
-      width: 170px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 26rem;
+      border: 2px solid blue;
     }
+
+    .dynamic-skills-container{
+      display: flex;
+      width: 26rem;
+      gap: .5rem;
+      align-items: center;
+      justify-content: space-between;
+      border: 2px solid black;
+    }
+
+
+  button {
+  font-family: Arial, sans-serif;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 7.5px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.skill-add-btn{
+  background-color: green;
+}
+
+.submit-update-btn{
+  background-color: #007bff;;
+}
+
+.submit-update-btn:active {
+  background-color: #004080;
+  box-shadow: none;
+}
+
+.submit-update-btn:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.skills-delete-btn{
+  background-color: red;
+}
+
+.skills-delete-btn img{
+  width: 20px;
+}
+
+.gender-section input{
+  width: auto;
+}
+
+
+
+
   </style>
 </section>

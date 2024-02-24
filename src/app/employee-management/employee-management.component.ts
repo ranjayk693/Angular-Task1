@@ -68,6 +68,8 @@ export class EmployeeManagementComponent {
         skills: this.EmployeeForm.get('skills')!.value,
       };
       this.employeeService.addEmployee(employee);
+      alert("Data is added sucessfully")
+      return;
     } else if (this.EmployeeForm.valid && this.compunent == 'employee-edit') {
       const employee: Employee = {
         id: this.EmployeeForm.get('id')!.value, // You can set this to null or generate a unique ID
@@ -78,8 +80,11 @@ export class EmployeeManagementComponent {
         skills: this.EmployeeForm.get('skills')!.value,
       };
       this.employeeService.updateEmployee(employee);
+      alert("Data is Updated sucessfully")
+      return;
     } else {
-      console.log('validation require ');
+      // console.log('validation require ');
+      alert("All fields are mendatary")
     }
   }
 
@@ -87,6 +92,7 @@ export class EmployeeManagementComponent {
     if (this.skills) {
       this.skills.push(this.SkillData());
     }
+    
   }
 
   onDeleteButton(index: number): void {

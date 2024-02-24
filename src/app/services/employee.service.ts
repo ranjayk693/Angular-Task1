@@ -14,7 +14,7 @@ export class UsersDataService {
       name: 'John',
       email: 'john@gmail.com',
       contact: '896547854',
-      gender: 'Male',
+      gender: 'male',
       skills: [{ skill: 'HTML', experience: 'Beginner' }],
     },
     {
@@ -22,7 +22,7 @@ export class UsersDataService {
       name: 'Mary',
       email: 'mary@gmail.com',
       contact: '896547854',
-      gender: 'Female',
+      gender: 'female',
       skills: [
         { skill: 'HTML', experience: 'Beginner' },
         { skill: 'CSS', experience: 'Beginner' },
@@ -34,7 +34,7 @@ export class UsersDataService {
       name: 'Victor',
       email: 'victor@gmail.com',
       contact: '996547854',
-      gender: 'Male',
+      gender: 'male',
       skills: [{ skill: 'HTML', experience: 'Beginner' }],
     },
     {
@@ -42,7 +42,7 @@ export class UsersDataService {
       name: 'Mickey',
       email: 'mickey@gmail.com',
       contact: '786547854',
-      gender: 'Male',
+      gender: 'male',
       skills: [{ skill: 'HTML', experience: 'Beginner' }],
     },
     {
@@ -50,7 +50,7 @@ export class UsersDataService {
       name: 'Minie',
       email: 'minie@gmail.com',
       contact: '789547854',
-      gender: 'Female',
+      gender: 'female',
       skills: [{ skill: 'HTML', experience: 'Beginner' }],
     },
   ];
