@@ -8,12 +8,12 @@ import {
 } from '@angular/forms';
 import { Employee } from '../models/employee';
 import { UsersDataService } from '../services/employee.service';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-employee-management',
   standalone: true,
-  imports: [ReactiveFormsModule, JsonPipe],
+  imports: [ReactiveFormsModule, JsonPipe, NgClass],
   templateUrl: './employee-management.component.html',
   styleUrl: './employee-management.component.scss',
 })
@@ -30,7 +30,7 @@ export class EmployeeManagementComponent {
     this.EmployeeForm = this.fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       contact: ['', Validators.required],
       gender: ['', Validators.required],
       skills: this.fb.array([this.SkillData()]),
@@ -57,7 +57,22 @@ export class EmployeeManagementComponent {
     return this.EmployeeForm.get('skills') as FormArray;
   }
 
+  validateDropdown(): boolean {
+    const skillsArray = this.EmployeeForm.get('skills') as FormArray;
+    const skillGroup = skillsArray.at(0) as FormGroup;
+    const experienceControl = skillGroup.get('experience');
+    const experienceValue = experienceControl?.value;
+    if (experienceValue === 'none') {
+      return true;
+    }
+    return false;
+  }
+
   onSubmitButton(): void {
+    if (this.validateDropdown()) {
+      alert('Please select the option for experince');
+      return;
+    }
     if (this.EmployeeForm.valid && this.compunent == 'employee-add') {
       const employee: Employee = {
         id: this.EmployeeForm.get('id')!.value, // You can set this to null or generate a unique ID
@@ -68,7 +83,6 @@ export class EmployeeManagementComponent {
         skills: this.EmployeeForm.get('skills')!.value,
       };
       this.employeeService.addEmployee(employee);
-      alert("Data is added sucessfully")
       return;
     } else if (this.EmployeeForm.valid && this.compunent == 'employee-edit') {
       const employee: Employee = {
@@ -80,19 +94,18 @@ export class EmployeeManagementComponent {
         skills: this.EmployeeForm.get('skills')!.value,
       };
       this.employeeService.updateEmployee(employee);
-      alert("Data is Updated sucessfully")
       return;
     } else {
-      // console.log('validation require ');
-      alert("All fields are mendatary")
+      console.log();
+      alert('All fields are mendatary');
     }
   }
 
-  onAddSkillButton(): void {
+  onAddSkillButton(event: Event): void {
+    event.preventDefault();
     if (this.skills) {
       this.skills.push(this.SkillData());
     }
-    
   }
 
   onDeleteButton(index: number): void {
@@ -109,7 +122,7 @@ export class EmployeeManagementComponent {
       });
 
       this.EmployeeForm = this.fb.group({
-        id: [{value:UserData[0].id,disabled:true}, Validators.required],
+        id: [{ value: UserData[0].id, disabled: true }, Validators.required],
         name: [UserData[0].name, Validators.required],
         email: [UserData[0].email, Validators.required],
         contact: [UserData[0].contact, Validators.required],

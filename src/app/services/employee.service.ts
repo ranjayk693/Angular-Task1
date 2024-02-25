@@ -15,7 +15,7 @@ export class UsersDataService {
       email: 'john@gmail.com',
       contact: '896547854',
       gender: 'male',
-      skills: [{ skill: 'HTML', experience: 'Beginner' }],
+      skills: [{ skill: 'HTML', experience: 'Intermediate' }],
     },
     {
       id: 2,
@@ -65,12 +65,14 @@ export class UsersDataService {
   }
 
   addEmployee(employee: Employee): Observable<Employee> {
-    const existingEmployee = this.UserData.find(emp => emp.id === employee.id);
-    if(existingEmployee){
-      alert("Duplicate ID are not allowed")
-    }
-    else{
+    const existingEmployee = this.UserData.find(
+      (emp) => emp.id === employee.id
+    );
+    if (existingEmployee) {
+      alert('Duplicate ID are not allowed');
+    } else {
       this.UserData.push(employee);
+      alert('Data is added sucessfully');
     }
     return of(employee);
   }
@@ -79,6 +81,7 @@ export class UsersDataService {
     const index = this.UserData.findIndex((emp) => emp.id === employee.id);
     if (index !== -1) {
       this.UserData[index] = employee;
+      alert('Data is Updated sucessfully');
     }
     return of(employee);
   }

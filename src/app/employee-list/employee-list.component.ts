@@ -24,6 +24,9 @@ export class EmployeeListComponent {
   }
 
   OnDeleteItem(id: number): void {
+    if (!confirm('Press OK to delete the item')) {
+      return;
+    }
     this.employeeService.deleteEmployee(id).subscribe(() => {
       this.userData = this.userData.filter((emp) => emp.id !== id);
     });
