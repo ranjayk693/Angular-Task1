@@ -24,8 +24,8 @@ export class UsersDataService {
       contact: '896547854',
       gender: 'female',
       skills: [
-        { skill: 'HTML', experience: 'Beginner' },
-        { skill: 'CSS', experience: 'Beginner' },
+        { skill: 'HTML', experience: 'Intermediate' },
+        { skill: 'CSS', experience: 'Intermediate' },
         { skill: 'Management', experience: 'Beginner' },
       ],
     },
@@ -35,7 +35,7 @@ export class UsersDataService {
       email: 'victor@gmail.com',
       contact: '996547854',
       gender: 'male',
-      skills: [{ skill: 'HTML', experience: 'Beginner' }],
+      skills: [{ skill: 'HTML', experience: 'Experinced' }],
     },
     {
       id: 4,
@@ -43,7 +43,7 @@ export class UsersDataService {
       email: 'mickey@gmail.com',
       contact: '786547854',
       gender: 'male',
-      skills: [{ skill: 'HTML', experience: 'Beginner' }],
+      skills: [{ skill: 'HTML', experience: 'Experinced' }],
     },
     {
       id: 5,
@@ -51,7 +51,7 @@ export class UsersDataService {
       email: 'minie@gmail.com',
       contact: '789547854',
       gender: 'female',
-      skills: [{ skill: 'HTML', experience: 'Beginner' }],
+      skills: [{ skill: 'HTML', experience: 'Intermediate' }],
     },
   ];
 

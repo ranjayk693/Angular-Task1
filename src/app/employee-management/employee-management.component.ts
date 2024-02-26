@@ -9,6 +9,7 @@ import {
 import { Employee } from '../models/employee';
 import { UsersDataService } from '../services/employee.service';
 import { JsonPipe, NgClass } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-management',
@@ -18,15 +19,22 @@ import { JsonPipe, NgClass } from '@angular/common';
   styleUrl: './employee-management.component.scss',
 })
 export class EmployeeManagementComponent {
+  // Geeting data two compunenets
   @Input() id: string = '';
   @Input() compunent: string = '';
 
   ButtonText = '';
+
+  // Reactive form Group
   EmployeeForm: FormGroup;
+
+  // Constructor for initilization of data
   constructor(
+    private router: Router,
     private fb: FormBuilder,
-    private employeeService: UsersDataService
+    private employeeService: UsersDataService,
   ) {
+    // Initilization of form
     this.EmployeeForm = this.fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
@@ -37,6 +45,7 @@ export class EmployeeManagementComponent {
     });
   }
 
+  // Fuction for Initilization of skill and experince 
   SkillData() {
     return this.fb.group({
       skill: ['', Validators.required],
@@ -44,6 +53,7 @@ export class EmployeeManagementComponent {
     });
   }
 
+  // Function to add the skill and experince 
   GetData(item: any) {
     return item.map((element: any, index: number) => {
       return this.fb.group({
@@ -53,54 +63,67 @@ export class EmployeeManagementComponent {
     });
   }
 
+  // Getter method
   get skills(): FormArray {
     return this.EmployeeForm.get('skills') as FormArray;
   }
 
+  // Function for Validation of Dropdown
   validateDropdown(): boolean {
     const skillsArray = this.EmployeeForm.get('skills') as FormArray;
-    const skillGroup = skillsArray.at(0) as FormGroup;
-    const experienceControl = skillGroup.get('experience');
-    const experienceValue = experienceControl?.value;
-    if (experienceValue === 'none') {
-      return true;
+    for(let i=0;i<skillsArray.length;i++){
+      const skillGroup = skillsArray.at(i) as FormGroup;
+      const experienceControl = skillGroup.get('experience');
+      const experienceValue = experienceControl?.value;
+      if (experienceValue === 'none') {
+        return true;
+      }
     }
     return false;
   }
 
+  //Submit button Function
   onSubmitButton(): void {
+    // Validate the dropdown options
     if (this.validateDropdown()) {
-      alert('Please select the option for experince');
+      alert('Please select the experince');
       return;
     }
+    // If Form is valid and it is for add compunent then this will going to execute
     if (this.EmployeeForm.valid && this.compunent == 'employee-add') {
       const employee: Employee = {
-        id: this.EmployeeForm.get('id')!.value, // You can set this to null or generate a unique ID
+        id: this.EmployeeForm.get('id')!.value, 
         name: this.EmployeeForm.get('name')!.value,
         email: this.EmployeeForm.get('email')!.value,
         contact: this.EmployeeForm.get('contact')!.value,
         gender: this.EmployeeForm.get('gender')!.value,
         skills: this.EmployeeForm.get('skills')!.value,
       };
-      this.employeeService.addEmployee(employee);
-      return;
-    } else if (this.EmployeeForm.valid && this.compunent == 'employee-edit') {
+      // Adding the data by calling service
+      this.employeeService.addEmployee(employee)
+      // Navigate to the home page
+      this.router.navigate(['']);
+    }
+    // If Form is valid and it is for edit compunent then this will going to execute
+     else if (this.EmployeeForm.valid && this.compunent == 'employee-edit') {
       const employee: Employee = {
-        id: this.EmployeeForm.get('id')!.value, // You can set this to null or generate a unique ID
+        id: this.EmployeeForm.get('id')!.value, 
         name: this.EmployeeForm.get('name')!.value,
         email: this.EmployeeForm.get('email')!.value,
         contact: this.EmployeeForm.get('contact')!.value,
         gender: this.EmployeeForm.get('gender')!.value,
         skills: this.EmployeeForm.get('skills')!.value,
       };
-      this.employeeService.updateEmployee(employee);
-      return;
+      // Updating the data by calling service 
+      this.employeeService.updateEmployee(employee)
+        // Navigate to the home page
+      this.router.navigate([''])
     } else {
-      console.log();
       alert('All fields are mendatary');
     }
   }
 
+  // Function to  add the dynmaic skill
   onAddSkillButton(event: Event): void {
     event.preventDefault();
     if (this.skills) {
@@ -131,4 +154,6 @@ export class EmployeeManagementComponent {
       });
     }
   }
+
+ 
 }

@@ -1,0 +1,111 @@
+$color_1: #fff;
+$font-family_1: Arial, sans-serif;
+$background-color_1: green;
+$background-color_2: #007bff;
+$background-color_3: #004080;
+$background-color_4: #0056b3;
+$background-color_5: red;
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	margin-left: 25px;
+}
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.employee-details {
+	display: flex;
+	flex-direction: column;
+}
+input {
+	font-size: 15px;
+	width: 34vw;
+	padding: 0.3rem;
+}
+.row {
+	display: flex;
+	align-items: center;
+	gap: 25px;
+	flex-wrap: wrap;
+}
+textarea {
+	resize: none;
+	padding: 0.5rem;
+}
+select {
+	padding: 0.3rem;
+}
+.skill-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 35vw;
+}
+.dynamic-skills-container {
+	display: flex;
+	flex-direction: row;
+	width: 35vw;
+	gap: 0.5rem;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: 5px;
+}
+button {
+	font-family: $font-family_1;
+	color: $color_1;
+	border: none;
+	border-radius: 3px;
+	padding: 7.5px 15px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.skill-add-btn {
+	background-color: $background-color_1;
+}
+.submit-update-btn {
+	width: 90px;
+	background-color: $background-color_2;
+	&:active {
+		background-color: $background-color_3;
+		box-shadow: none;
+	}
+	&:hover {
+		background-color: $background-color_4;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+}
+.skills-delete-btn {
+	background-color: $background-color_5;
+	img {
+		width: 20px;
+	}
+}
+.gender-section {
+	input {
+		width: auto;
+	}
+}
+input.ng-invalid.ng-touched {
+	border: 1px solid red;
+}
+textarea.ng-invalid.ng-touched {
+	border: 1px solid red;
+}
+@media (max-width: 500px) {
+	.form-container {
+		margin-left: 0px;
+	}
+	.dynamic-skills-container {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+	}
+	input {
+		width: 22.5rem;
+	}
+}
