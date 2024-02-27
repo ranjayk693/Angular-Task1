@@ -9,5 +9,6 @@ import { EmployeeManagementComponent } from '../employee-management/employee-man
   imports: [EmployeeManagementComponent],
 })
 export class EmployeeAddComponent {
+  // Define the type of compunent
   type = 'employee-add';
 }

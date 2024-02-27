@@ -16,6 +16,7 @@ export class EmployeeEditComponent {
 
   type = 'employee-edit';
   ngOnInit() {
+    // Sending the id of employee to the employee-mangement compunent
     this.employee_id = this.route.snapshot.paramMap.get('id');
   }
 }

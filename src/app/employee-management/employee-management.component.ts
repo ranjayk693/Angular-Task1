@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 })
 export class EmployeeManagementComponent {
   // Geeting data two compunenets
-  @Input() id: string = '';
+  @Input() id: string = '';          //get the id from the edit employee
   @Input() compunent: string = '';
 
   ButtonText = '';
@@ -131,6 +131,7 @@ export class EmployeeManagementComponent {
     }
   }
 
+  // Delete the dynmaic skills section
   onDeleteButton(index: number): void {
     if (this.skills) {
       this.skills.removeAt(index);
@@ -138,14 +139,15 @@ export class EmployeeManagementComponent {
   }
 
   ngOnInit() {
+    // Giving the dynmaic name for the button
     this.ButtonText = this.compunent === 'employee-edit' ? 'Update' : 'Submit';
+    // If the id of employee exists then get the value and put the value to the inputs fields
     if (this.id) {
       const UserData = this.employeeService.UserData.filter((element) => {
         return element.id.toString() == this.id;
       });
-
       this.EmployeeForm = this.fb.group({
-        id: [{ value: UserData[0].id, disabled: true }, Validators.required],
+        id: [{ value: UserData[0].id, disabled: true }, Validators.required], //Making the id field disabled
         name: [UserData[0].name, Validators.required],
         email: [UserData[0].email, Validators.required],
         contact: [UserData[0].contact, Validators.required],
@@ -154,6 +156,4 @@ export class EmployeeManagementComponent {
       });
     }
   }
-
- 
 }

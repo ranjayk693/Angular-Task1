@@ -1,3 +1,4 @@
+// Defining the colors
 $color_1: #fff;
 $font-family_1: Arial, sans-serif;
 $background-color_1: green;
@@ -6,11 +7,15 @@ $background-color_3: #004080;
 $background-color_4: #0056b3;
 $background-color_5: red;
 
+
+// Form conatiner styling
 .form-container {
 	display: flex;
 	flex-direction: column;
 	margin-left: 25px;
 }
+
+// Form Styling
 form {
 	display: flex;
 	flex-direction: column;
@@ -96,6 +101,8 @@ input.ng-invalid.ng-touched {
 textarea.ng-invalid.ng-touched {
 	border: 1px solid red;
 }
+
+// Styling for Smaller screen
 @media (max-width: 500px) {
 	.form-container {
 		margin-left: 0px;

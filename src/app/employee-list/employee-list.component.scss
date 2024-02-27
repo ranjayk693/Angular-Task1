@@ -1,9 +1,11 @@
+// Define the color
 $color_1: white;
 $background-color_1: rgb(7, 161, 7);
 $background-color_2: #cfcece;
 $background-color_3: transparent;
 $background-color_4: #b0b0b0;
 
+// Employee list container styling
 .employee-list-container {
 	display: flex;
 	flex-direction: column;
@@ -12,9 +14,11 @@ $background-color_4: #b0b0b0;
 	left: 15px;
 	top: 20px;
 }
+// Employee button container
 .employee-btn-container {
 	width: 98%;
 	text-align: end;
+	// Buttom for Add employee
 	button {
 		background-color: $background-color_1;
 		color: $color_1;
@@ -23,6 +27,7 @@ $background-color_4: #b0b0b0;
 		border-radius: 3px;
 	}
 }
+// Table container styling
 .table-container {
 	margin-top: 10px;
 }
@@ -40,6 +45,7 @@ td {
 	border-top: 1px solid grey;
 	border-collapse: collapse;
 }
+// Adding hovering color and nadding color for odd element
 tbody {
 	>tr {
 		&:nth-child(odd) {
@@ -53,6 +59,7 @@ tbody {
 img {
 	width: 20px;
 }
+// Button for edit and delete
 button {
 	margin-left: 10px;
 	background-color: $background-color_3;
@@ -62,6 +69,8 @@ button {
 		cursor: pointer;
 	}
 }
+
+// For Smaller devices styling
 @media (max-width: 800px) {
 	.employee-list-container {
 		position: relative;

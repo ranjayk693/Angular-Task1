@@ -1,9 +1,12 @@
 <section class="form-container">
-  <h1>Add Employee</h1>
+  <!-- Giving dynmaic heading name to the compunent -->
+  <h1>{{id?'Update':'Add'}} Employee</h1>
 
+  <!-- Form to get the Employee detail -->
   <form [formGroup]="EmployeeForm" (ngSubmit)="onSubmitButton()">
     <section class="row1 row">
       <section class="employee-details">
+        <!-- Id field -->
         <label for="UserId">Employee Id:</label>
         <input
           type="number"
@@ -13,6 +16,7 @@
         />
       </section>
       <section class="employee-details">
+        <!-- Name field -->
         <label for="UserName">Name</label>
         <input
           type="text"
@@ -26,6 +30,7 @@
 
     <section class="row2 row">
       <section class="employee-details">
+        <!-- Contact field -->
         <label for="UserContact">Contact number:</label>
         <input
           type="number"
@@ -35,6 +40,7 @@
         />
       </section>
       <section class="employee-details">
+        <!-- Email Field -->
         <label for="UserEmail">Email:</label>
         <input
           type="email"
@@ -48,11 +54,14 @@
     <section class="row3 row">
       <section class="employee-details skill-container">
         <label>Skills</label>
+        <!-- Buttom to add mutile skills -->
         <button class="skill-add-btn" (click)="onAddSkillButton($event)">
           Add skill +
         </button>
       </section>
+
       <section class="employee-details gender-section">
+        <!-- Gender Field -->
         <label> Gender:</label>
         <section>
           <input
@@ -78,6 +87,7 @@
       </section>
     </section>
 
+    <!-- Adding the dynmaic skill section -->
     <section formArrayName="skills">
       @for(item of skills!.controls ;track item ;let i=$index){
 
@@ -100,6 +110,7 @@
       </section>
       }
     </section>
+    <!-- Button For update or Add -->
     <button type="submit" class="submit-update-btn">
       {{ ButtonText }}
     </button>

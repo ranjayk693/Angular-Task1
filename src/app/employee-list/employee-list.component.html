@@ -1,9 +1,13 @@
+<!-- Section for employee list container -->
 <section class="employee-list-container">
   <section class="employee-btn-container">
+    <!-- Button to add the employee which then redirect to add compunent -->
     <button class="add-btn" (click)="onAddEmployee()">Add Employee</button>
   </section>
+  <!-- Section to display all the employee detail in the tabular form -->
   <section class="table-container">
     <table>
+      <!-- Table heading -->
       <thead>
         <tr>
           <th>ID</th>
@@ -16,6 +20,7 @@
         </tr>
       </thead>
       <tbody>
+        <!-- Adding the dynmaic data -->
         @for(item of userData; track item.id) {
         <tr>
           <td>{{ item.id }}</td>
@@ -25,12 +30,15 @@
           <td>{{ item.gender }}</td>
           <td>
             <ol>
+              <!-- Adding the dynamic skills -->
               @for(list of item.skills; track $index){
               <li>{{ list.skill }} (Experience {{ list.experience }} level)</li>
               }
             </ol>
           </td>
           <td>
+            <!-- Actions button to add or delete items -->
+            <!-- When clicked on add button then it will redirect to EditEmployee  -->
             <button [routerLink]="['/EditEmployeeDetails', item.id]">
               <img src="assets/icons/edit-icon.png" alt="" />
             </button>

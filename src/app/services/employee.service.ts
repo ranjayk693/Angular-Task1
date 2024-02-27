@@ -7,7 +7,7 @@ import { Employee } from '../models/employee';
 })
 export class UsersDataService {
   constructor() {}
-
+  // Local UserData that contain information of users
   UserData = [
     {
       id: 1,
@@ -55,19 +55,23 @@ export class UsersDataService {
     },
   ];
 
+  // Function to get Employee
   getEmployee(): Observable<Employee[]> {
     return of(this.UserData);
   }
 
+  // Function to get Employee by ID
   getEmployeeById(id: number): Observable<Employee> {
     const employee: any = this.UserData.find((emp) => emp.id === id);
     return of(employee);
   }
 
+  // Function to add employee
   addEmployee(employee: Employee): Observable<Employee> {
     const existingEmployee = this.UserData.find(
       (emp) => emp.id === employee.id
     );
+    // Check for Duplicate id
     if (existingEmployee) {
       alert('Duplicate ID are not allowed');
     } else {
@@ -77,6 +81,7 @@ export class UsersDataService {
     return of(employee);
   }
 
+  // Update the employee by getting employee object
   updateEmployee(employee: Employee): Observable<Employee> {
     const index = this.UserData.findIndex((emp) => emp.id === employee.id);
     if (index !== -1) {
@@ -86,6 +91,7 @@ export class UsersDataService {
     return of(employee);
   }
 
+  // Delete the employee by id
   deleteEmployee(id: number): Observable<void> {
     const index = this.UserData.findIndex((emp) => emp.id === id);
     if (index !== -1) {
