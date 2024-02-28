@@ -56,18 +56,17 @@ export class UsersDataService {
   ];
 
   // Function to get Employee
-  getEmployee(): Observable<Employee[]> {
-    return of(this.UserData);
+  getEmployee(): Employee[] {
+    return this.UserData;
   }
 
   // Function to get Employee by ID
-  getEmployeeById(id: number): Observable<Employee> {
-    const employee: any = this.UserData.find((emp) => emp.id === id);
-    return of(employee);
+  getEmployeeById(id: number): Employee {
+    return this.UserData.find((emp) => emp.id === id)!;
   }
 
   // Function to add employee
-  addEmployee(employee: Employee): Observable<Employee> {
+  addEmployee(employee: Employee): void {
     const existingEmployee = this.UserData.find(
       (emp) => emp.id === employee.id
     );
@@ -78,25 +77,22 @@ export class UsersDataService {
       this.UserData.push(employee);
       alert('Data is added sucessfully');
     }
-    return of(employee);
   }
 
   // Update the employee by getting employee object
-  updateEmployee(employee: Employee): Observable<Employee> {
+  updateEmployee(employee: Employee): void {
     const index = this.UserData.findIndex((emp) => emp.id === employee.id);
     if (index !== -1) {
       this.UserData[index] = employee;
       alert('Data is Updated sucessfully');
     }
-    return of(employee);
   }
 
   // Delete the employee by id
-  deleteEmployee(id: number): Observable<void> {
+  deleteEmployee(id: number): void {
     const index = this.UserData.findIndex((emp) => emp.id === id);
     if (index !== -1) {
       this.UserData.splice(index, 1);
     }
-    return of();
   }
 }

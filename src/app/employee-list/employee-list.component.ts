@@ -18,18 +18,15 @@ export class EmployeeListComponent {
   ) {}
 
   ngOnInit(): void {
-    this.employeeService
-      .getEmployee()
-      .subscribe((employees) => (this.userData = employees));
+    this.userData = this.employeeService.getEmployee();
   }
 
   OnDeleteItem(id: number): void {
     if (!confirm('Press OK to delete the item')) {
       return;
     }
-    this.employeeService.deleteEmployee(id).subscribe(() => {
-      this.userData = this.userData.filter((emp) => emp.id !== id);
-    });
+    this.employeeService.deleteEmployee(id);
+    this.userData = this.userData.filter((emp) => emp.id !== id);
   }
 
   onAddEmployee() {

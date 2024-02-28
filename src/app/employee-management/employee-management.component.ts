@@ -20,10 +20,10 @@ import { Router } from '@angular/router';
 })
 export class EmployeeManagementComponent {
   // Geeting data two compunenets
-  @Input() id: string = '';          //get the id from the edit employee
-  @Input() compunent: string = '';
+  @Input() id: string = ''; //get the id from the edit employee
+  @Input() compunent: string = ''; //get the type of compunent
 
-  ButtonText = '';
+  ButtonText = ''; //Button name is dynamic as per the compunent name
 
   // Reactive form Group
   EmployeeForm: FormGroup;
@@ -32,7 +32,7 @@ export class EmployeeManagementComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private employeeService: UsersDataService,
+    private employeeService: UsersDataService
   ) {
     // Initilization of form
     this.EmployeeForm = this.fb.group({
@@ -41,20 +41,20 @@ export class EmployeeManagementComponent {
       email: ['', [Validators.required, Validators.email]],
       contact: ['', Validators.required],
       gender: ['', Validators.required],
-      skills: this.fb.array([this.SkillData()]),
+      skills: this.fb.array([this.Data_Skill()]),
     });
   }
 
-  // Fuction for Initilization of skill and experince 
-  SkillData() {
+  // Fuction for Initilization of skill and experince
+  Data_Skill() {
     return this.fb.group({
       skill: ['', Validators.required],
       experience: ['none', Validators.required],
     });
   }
 
-  // Function to add the skill and experince 
-  GetData(item: any) {
+  // Function to add the skill and experince
+  Get_Data(item: any) {
     return item.map((element: any, index: number) => {
       return this.fb.group({
         skill: [element.skill, Validators.required],
@@ -71,7 +71,7 @@ export class EmployeeManagementComponent {
   // Function for Validation of Dropdown
   validateDropdown(): boolean {
     const skillsArray = this.EmployeeForm.get('skills') as FormArray;
-    for(let i=0;i<skillsArray.length;i++){
+    for (let i = 0; i < skillsArray.length; i++) {
       const skillGroup = skillsArray.at(i) as FormGroup;
       const experienceControl = skillGroup.get('experience');
       const experienceValue = experienceControl?.value;
@@ -92,7 +92,7 @@ export class EmployeeManagementComponent {
     // If Form is valid and it is for add compunent then this will going to execute
     if (this.EmployeeForm.valid && this.compunent == 'employee-add') {
       const employee: Employee = {
-        id: this.EmployeeForm.get('id')!.value, 
+        id: this.EmployeeForm.get('id')!.value,
         name: this.EmployeeForm.get('name')!.value,
         email: this.EmployeeForm.get('email')!.value,
         contact: this.EmployeeForm.get('contact')!.value,
@@ -100,24 +100,24 @@ export class EmployeeManagementComponent {
         skills: this.EmployeeForm.get('skills')!.value,
       };
       // Adding the data by calling service
-      this.employeeService.addEmployee(employee)
+      this.employeeService.addEmployee(employee);
       // Navigate to the home page
       this.router.navigate(['']);
     }
     // If Form is valid and it is for edit compunent then this will going to execute
-     else if (this.EmployeeForm.valid && this.compunent == 'employee-edit') {
+    else if (this.EmployeeForm.valid && this.compunent == 'employee-edit') {
       const employee: Employee = {
-        id: this.EmployeeForm.get('id')!.value, 
+        id: this.EmployeeForm.get('id')!.value,
         name: this.EmployeeForm.get('name')!.value,
         email: this.EmployeeForm.get('email')!.value,
         contact: this.EmployeeForm.get('contact')!.value,
         gender: this.EmployeeForm.get('gender')!.value,
         skills: this.EmployeeForm.get('skills')!.value,
       };
-      // Updating the data by calling service 
-      this.employeeService.updateEmployee(employee)
-        // Navigate to the home page
-      this.router.navigate([''])
+      // Updating the data by calling service
+      this.employeeService.updateEmployee(employee);
+      // Navigate to the home page
+      this.router.navigate(['']);
     } else {
       alert('All fields are mendatary');
     }
@@ -127,7 +127,7 @@ export class EmployeeManagementComponent {
   onAddSkillButton(event: Event): void {
     event.preventDefault();
     if (this.skills) {
-      this.skills.push(this.SkillData());
+      this.skills.push(this.Data_Skill());
     }
   }
 
@@ -147,12 +147,13 @@ export class EmployeeManagementComponent {
         return element.id.toString() == this.id;
       });
       this.EmployeeForm = this.fb.group({
+        //initalizing the form group with predefine input field for updation operation
         id: [{ value: UserData[0].id, disabled: true }, Validators.required], //Making the id field disabled
         name: [UserData[0].name, Validators.required],
         email: [UserData[0].email, Validators.required],
         contact: [UserData[0].contact, Validators.required],
         gender: [UserData[0].gender, Validators.required],
-        skills: this.fb.array(this.GetData(UserData[0].skills)),
+        skills: this.fb.array(this.Get_Data(UserData[0].skills)),
       });
     }
   }
